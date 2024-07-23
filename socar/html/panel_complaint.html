@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../scss/style.css">
+    <title>Document</title>
+    <style>
+        .imageTd img {
+            cursor: pointer;
+        }
+        .edit-mode td input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header class="panel">
+        <div class="panel_left">
+            <img src="../assets/images/logo.png" alt="Image">
+            <p>Şikayətlər</p>
+            <p>İdarə paneli</p>
+        </div>
+        <div class="panel_right">
+            <div class="selectBox">
+                <div class="img">
+                    <img src="../assets/svg/users 02.svg" alt="">
+                </div>
+                <select id="role" name="role">
+                    <option value="admin">Admin</option>
+                    <option value="superadmin">Superadmin</option>
+                </select>
+            </div>
+        </div>
+    </header>
+    <div class="search">
+        <img src="../assets/svg/search.svg" alt="">
+        <input type="text" name="search" id="search" placeholder="Axtar" onkeyup="searchTable()">
+    </div>
+    <table id="dataTable">
+        <tr>
+            <th>Ad</th>
+            <th>Soy Ad</th>
+            <th>Şöbə</th>
+            <th>Vəzifə</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>Fəxriyyə</td>
+            <td>Sadiqova</td>
+            <td>Design</td>
+            <td>Admin</td>
+            <td class="imageTd">
+                <img src="../assets/svg/edit.svg" alt="Edit" onclick="editRow(this)">
+                <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+            </td>
+        </tr>
+        <tr>
+            <td>Saleh</td>
+            <td>Quliyev</td>
+            <td>HR</td>
+            <td>Admin</td>
+            <td class="imageTd">
+                <img src="../assets/svg/edit.svg" alt="Edit" onclick="editRow(this)">
+                <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+            </td>
+        </tr>
+        <tr>
+            <td>Fəridə</td>
+            <td>Həsənova</td>
+            <td>Saleh</td>
+            <td>Admin</td>
+            <td class="imageTd">
+                <img src="../assets/svg/edit.svg" alt="Edit" onclick="editRow(this)">
+                <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+            </td>
+        </tr>
+        <tr>
+            <td>İsmayıl</td>
+            <td>Tağıyev</td>
+            <td>Development</td>
+            <td>Admin</td>
+            <td class="imageTd">
+                <img src="../assets/svg/edit.svg" alt="Edit" onclick="editRow(this)">
+                <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+            </td>
+        </tr>
+    </table>
+    <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("search");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("dataTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        function deleteRow(r) {
+            var row = r.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+        function editRow(r) {
+            var row = r.parentNode.parentNode;
+            if (row.classList.contains('edit-mode')) {
+                var inputs = row.getElementsByTagName('input');
+                for (var i = 0; i < inputs.length; i++) {
+                    var td = inputs[i].parentNode;
+                    td.innerHTML = inputs[i].value;
+                }
+                row.classList.remove('edit-mode');
+                r.src = "../assets/svg/edit.svg";
+            } else {
+                var tds = row.getElementsByTagName('td');
+                for (var i = 0; i < tds.length - 1; i++) { 
+                    var value = tds[i].innerText;
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = value;
+                    tds[i].innerHTML = '';
+                    tds[i].appendChild(input);
+                }
+                row.classList.add('edit-mode');
+                r.src = "../assets/svg/edit.svg";
+            }
+        }
+    </script>
+</body>
+</html>

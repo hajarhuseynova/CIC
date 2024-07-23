@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../scss/style.css">
+    <title>Document</title>
+    <style>
+          .error-message {
+            display: none;
+            color: red;
+            font-size: 14px;
+        }
+        .error {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <header class="panel">
+        <div class="panel_left">
+        <img src="../assets/images/logo.png" alt="Image">
+        <p>Şikayətlər</p>
+        <p>İdarə paneli</p>
+        </div>
+        <div class="panel_right">
+              <div class="selectBox">
+                <div class="img">
+                    <img src="../assets/svg/users 02.svg" alt="">
+                </div>
+                <select id="role" name="role">
+                    <option value="admin">Admin</option>
+                    <option value="superadmin">Superadmin</option>
+                </select>
+              </div>
+        </div>
+    </header>
+    <div class="create_main">
+        <h3>Giriş icazəsi</h3>
+        <div class="inputs">
+            <div class="input">
+                <input type="text" id="username" placeholder="İstifadəçi adı">
+                <p id="username-error" class="error-message">İstifadəçi adı düzgün deyil</p>
+            </div>
+            <div class="input">
+                <input type="text" id="email" placeholder="E-mail">
+                <p id="email-error" class="error-message">E-mail düzgün deyil</p>
+            </div>
+        </div>
+        <div class="check">
+            <input type="checkbox" name="check" id="check">
+            <label for="check">Super User</label>
+        </div>
+        <div class="selects">
+            <select id="role" name="role">
+                <option value="admin">Department</option>
+                <option value="admin">1</option>
+                <option value="superadmin">2</option>
+            </select>
+            <select id="role" name="role">
+                <option value="admin">Branch</option>
+                <option value="admin">1</option>
+                <option value="superadmin">2</option>
+            </select>
+        </div>
+        <div class="roles">
+            <h4>Rollar</h4>
+            <div class="check">
+                <input type="checkbox" name="role" id="role1">
+                <label for="role1">Rol 1</label>
+            </div>
+            <div class="check">
+                <input type="checkbox" name="role" id="role2">
+                <label for="role2">Rol 2</label>
+            </div>
+            <div class="check">
+                <input type="checkbox" name="role" id="role3">
+                <label for="role3">Rol 3</label>
+            </div>
+        </div>
+        <button onclick="validateForm()">Daxil ol</button>
+    </div>
+    <script>
+         const checkboxes = document.querySelectorAll('input[name="role"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    checkboxes.forEach(otherCheckbox => {
+                        if (otherCheckbox !== checkbox) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+                }
+            });
+        });
+        function validateForm() {
+            const usernameInput = document.getElementById('username');
+            const emailInput = document.getElementById('email');
+            const usernameError = document.getElementById('username-error');
+            const emailError = document.getElementById('email-error');
+
+            const usernamePattern = /^[a-zA-Z0-9_]{3,16}$/; // Alphanumeric and underscore, 3-16 characters
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            let isValid = true;
+
+            if (!usernamePattern.test(usernameInput.value)) {
+                usernameInput.classList.add('error');
+                usernameError.style.display = 'inline';
+                isValid = false;
+            } else {
+                usernameInput.classList.remove('error');
+                usernameError.style.display = 'none';
+            }
+
+            if (!emailPattern.test(emailInput.value)) {
+                emailInput.classList.add('error');
+                emailError.style.display = 'inline';
+                isValid = false;
+            } else {
+                emailInput.classList.remove('error');
+                emailError.style.display = 'none';
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+
+</html>

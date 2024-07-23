@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 50px 95px;
+}
+.container h1{
+     margin-bottom: 50px;
+}
+.stations{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+     gap: 10px;
+}
+.station{
+    width: 280px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding-top: 6px;
+    padding-bottom: 15px;
+    margin-top: 30px;
+    border-radius: 5px;
+    border: 1px solid #EEEEEE;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.data{
+    display: flex;
+    flex-direction: column;
+    margin-top: 11px;
+    margin-left: 10px;
+}
+.title{
+    color: black;
+    font-size: 14px;
+}
+.mini{
+    font-size: 11px;
+}
+.large{
+    font-size: 13px;
+}
+.data a{
+    color: black;
+    text-decoration: none;
+}
+@media screen and (max-width: 800px) {
+   .container h1 {
+    margin-bottom: 20px;
+    font-size: 20px;
+   }
+   .schedule h4{
+    font-size: 16px;
+   }
+}
+@media screen and (max-width: 400px) {
+   .container h1 {
+    margin-bottom: 20px;
+    font-size: 16px;
+   }
+   .schedule h4{
+    font-size: 13px;
+   }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Avtobus Dayanacaqları</h1>
+        <div class="schedule">
+            <h4>Dayanacaqların sıyahısı</h4>
+            <div class="stations">               
+            </div>
+        </div>
+    </div>
+    <script>
+        const busStops = [
+    { id: 1, name: "SOCAR - Əhmədli", location: "SOCAR Tower", arrival: "08:45", departure: "18:15" },
+    { id: 2, name: "SOCAR - Bakıxanov, Qaraçuxur qəs.", location: "SOCAR Tower", arrival: "08:45", departure: "18:15" },
+    { id: 3, name: "SOCAR - Yeni Yasamal", location: "SOCAR Tower", arrival: "08:45", departure: "18:15" },
+    { id: 4, name: "SOCAR - 7-ci, 9-cu Mikrorayon", location: "SOCAR Tower", arrival: "08:45", departure: "18:15" },
+    { id: 5, name: "SOCAR - Sumqayıt şəh.", location: "SOCAR Tower", arrival: "08:45", departure: "18:15" },
+    { id: 6, name: "SOCAR - Yeni Günəşli", location: "SOCAR Tower", arrival: "08:45", departure: "18:15" },
+    { id: 7, name: "SOCAR - Lökbatan qəs.", location: "SOCAR Tower", arrival: "08:45", departure: "18:15" },
+    { id: 8, name: "SOCAR - Badamdar qəs.", location: "SOCAR Tower", arrival: "08:45", departure: "18:15" }
+];
+
+const stations = document.querySelector(".stations");
+
+const station = busStops.map(element => `
+    <div class="station">
+        <div class="data">
+            <span class="title mini">Ad</span>
+            <a href="map.html" class="text">${element.name}</a>
+        </div>
+        <div class="data">
+            <span class="title mini">Yer</span>
+            <span class="title large">${element.location}</span>
+        </div>
+        <div class="data">
+            <span class="title mini">Gəliş vaxtı</span>
+            <span class="title large">${element.arrival}</span>
+        </div>
+        <div class="data">
+            <span class="title mini">Gediş vaxtı</span>
+            <span class="title large">${element.departure}</span>
+        </div>
+    </div>
+`).join('');
+
+stations.innerHTML = station;
+
+    </script>
+</body>
+</html>

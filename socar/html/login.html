@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../scss/style.css">
+    <title>Document</title>
+    <style>
+        .error {
+            border: 2px solid #CB0500 !important;
+        }
+        .error-message {
+            display: none;
+            color: red;
+        }
+        .error-message.inline {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container_login">
+        <img src="../assets/images/logo.png" alt="">
+        <input type="text" id="email" placeholder="E-mail">
+        <p id="email-error" class="error-message">E-mail düzgün deyil</p>
+        <input type="password" id="password" placeholder="Parol">
+        <p id="password-error" class="error-message">Parol düzgün deyil</p>
+        <button onclick="validateForm()">Daxil ol</button>
+    </div>
+    <script>
+        function validateForm() {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const passwordPattern = /^.{6,}$/; 
+
+            let isValid = true;
+
+            if (!emailPattern.test(emailInput.value)) {
+                emailInput.classList.add('error');
+                emailError.classList.add('inline');
+                isValid = false;
+            } else {
+                emailInput.classList.remove('error');
+                emailError.classList.remove('inline');
+            }
+
+            if (!passwordPattern.test(passwordInput.value)) {
+                passwordInput.classList.add('error');
+                passwordError.classList.add('inline');
+                isValid = false;
+            } else {
+                passwordInput.classList.remove('error');
+                passwordError.classList.remove('inline');
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>

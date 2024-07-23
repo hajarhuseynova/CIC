@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <title>Document</title>
+   <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    }
+   .container{  
+    margin-top: 20px;
+    display: flex;
+    margin-bottom: 20px;
+    } 
+    .schedule{
+    border-radius: 5px;
+    width: 50%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+   }
+.data{
+    display: flex;
+    justify-content: space-between;
+    padding:0 15px;
+    padding-top: 8px !important;
+}
+.data:last-child{
+        padding-bottom: 8px;
+}
+.title{
+    color: gray;
+    font-size: 15px;
+}
+.text{
+    color: red;
+}
+.locations{
+width: 48%;
+margin-left: 50px;
+padding: 20px 35px;
+display: flex;
+flex-direction: column;
+border-radius: 5px;
+box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.location{
+display: flex;
+}
+.location label{
+    margin-left: 10px;
+    color: red;
+}
+.circle{
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #686D76;
+    cursor: pointer;
+}
+.line{
+    width: 3px;
+    height: 18px;
+    background-color: black;
+    margin-left: 6px;
+    margin-top: -3px;
+}
+@media screen and (max-width: 900px) {
+  .container{  
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+    } 
+  .locations{
+    margin-top: 30px;
+    margin-left: 0;
+  }
+  .locations {
+    padding: 20px 19px;
+}
+
+}
+@media screen and (max-width: 700px) {
+.text{
+  font-size: 13px;
+}
+.title{
+  font-size: 12px;
+}
+.location label {
+    margin-left: 5px;
+    font-size: 12px !important;
+}
+.locations {
+    padding: 19px 19px;
+}
+}
+   </style>
+</head>
+<body>
+    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1iXZY2nWe5yRZ7nV38N5MTL6Yn2ADdrc&ehbc=2E312F" width="100%" height="400"></iframe>
+  <div class="container">
+  </div>
+</body>
+<script>
+   const routeDetails = {
+  1: {
+    name: 'Əhmədli',
+    vehicle: 'İsuzu Visigo',
+    location: 'SOCAR Tower',
+    phone: '050-575-43-84',
+    plate: '99 JU 968',
+    driver: 'Hacıyev Vahid',
+    serviceNo: 4,
+    route: 'SOCAR - Əhmədli marşrutu, Neapol Dairəsi',
+    arrival: '08:45',
+    departure: '18:15',
+    stops: ['Gəncə pr', 'Həzi Aslanov m/s', 'Nargilə', '8 Noyabr pr.Amay T/M', 'Xətai m/s', 'Heydər Əliyev prospekti', 'SOCAR Tower']
+  }
+};
+const container = document.querySelector(".container");
+const route = routeDetails[1]; 
+const innerHtml = `
+  <div class="schedule">
+    <div class="data">
+      <span class="title">Ad</span>
+      <span class="text">${route.name}</span>
+    </div>
+    <div class="data">
+      <span class="title">Avtomobil</span>
+      <span class="text">${route.vehicle}</span>
+    </div>
+    <div class="data">
+      <span class="title">Yer</span>
+      <span class="text">${route.location}</span>
+    </div>
+    <div class="data">
+      <span class="title">Telefon</span>
+      <span class="text">${route.phone}</span>
+    </div>
+    <div class="data">
+      <span class="title">Avtomobil nömrəsi</span>
+      <span class="text">${route.plate}</span>
+    </div>
+    <div class="data">
+      <span class="title">Sürücü</span>
+      <span class="text">${route.driver}</span>
+    </div>
+    <div class="data">
+      <span class="title">Servis No</span>
+      <span class="text">${route.serviceNo}</span>
+    </div>
+    <div class="data">
+      <span class="title">Gəliş Vaxtı</span>
+      <span class="text">${route.arrival}</span>
+    </div>
+    <div class="data">
+      <span class="title">Gediş Vaxtı</span>
+      <span class="text">${route.departure}</span>
+    </div>
+  </div>
+  <div class="locations">
+    ${route.stops.map((stop, index) => `
+      <div class="location">
+      <div class="circle">
+       </div>
+        <label for="loc${index + 1}">${stop}</label>
+      </div>
+
+      ${index < route.stops.length - 1 ? '<div class="line"></div>' : ''}
+    `).join('')}
+  </div>
+`;
+container.innerHTML = innerHtml;
+const circles=document.querySelectorAll(".circle")
+circles.forEach(circle => {
+      circle.addEventListener("click", () => {
+        circle.style.backgroundColor = "red";
+      });
+    });
+</script>
+</html>
