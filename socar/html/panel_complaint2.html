@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../scss/style.css">
+    <title>Document</title>
+    <style>
+        .imageTd img {
+            cursor: pointer;
+        }
+        .view-mode td input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header class="panel">
+        <div class="panel_left">
+            <img src="../assets/images/logo.png" alt="Image">
+            <p>Şikayətlər</p>
+            <p>İdarə paneli</p>
+        </div>
+        <div class="panel_right">
+            <div class="selectBox">
+                <div class="img">
+                    <img src="../assets/svg/users 02.svg" alt="">
+                </div>
+                <select id="role" name="role">
+                    <option value="admin">Admin</option>
+                    <option value="superadmin">Superadmin</option>
+                </select>
+            </div>
+        </div>
+    </header>
+    <div class="search">
+        <img src="../assets/svg/search.svg" alt="">
+        <input type="text" name="search" id="search" placeholder="Axtar" onkeyup="searchTable()">
+    </div>
+    <div class="complaint">
+        <h3>Şikayətlər</h3>
+        <div class="line"></div>
+        <table id="dataTable">
+            <tr>
+                <th>Feedback ID</th>
+                <th>Office</th>
+                <th>Tarix</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>AKSJDHY12</td>
+                <td>Remote</td>
+                <td>12/06/24</td>
+                <td>
+                    <div class="special blue"><h6>Davam edir</h6></div>
+                </td>
+                <td class="imageTd">
+                    <img src="../assets/svg/view.svg" alt="view" onclick="viewRow(this)">
+                    <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+                </td>
+            </tr>
+            <tr>
+                <td>IA1234IA</td>
+                <td>Remote</td>
+                <td>12/06/24</td>
+                <td>
+                    <div class="special red"><h6>Cavab gözlənilir</h6></div>
+                </td>
+                <td class="imageTd">
+                    <img src="../assets/svg/view.svg" alt="view" onclick="viewRow(this)">
+                    <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+                </td>
+            </tr>
+            <tr>
+                <td>AKSJDHY12</td>
+                <td>Remote</td>
+                <td>12/06/24</td>
+                <td>
+                    <div class="special green"><h6>Tamamlandı</h6></div>
+                </td>
+                <td class="imageTd">
+                    <img src="../assets/svg/view.svg" alt="view" onclick="viewRow(this)">
+                    <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+                </td>
+            </tr>
+            <tr>
+                <td>IAI1234IAJ</td>
+                <td>Office</td>
+                <td>12/06/24</td>
+                <td>
+                    <div class="special green"><h6>Tamamlandı</h6></div>
+                </td>
+                <td class="imageTd">
+                    <img src="../assets/svg/view.svg" alt="view" onclick="viewRow(this)">
+                    <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+                </td>
+            </tr>
+            <tr>
+                <td>IAJDHJ123J</td>
+                <td>Office</td>
+                <td>12/06/24</td>
+                <td>
+                    <div class="special red"><h6>Cavab gözlənilir</h6></div>
+                </td>
+                <td class="imageTd">
+                    <img src="../assets/svg/view.svg" alt="view" onclick="viewRow(this)">
+                    <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+                </td>
+            </tr>
+            <tr>
+                <td>AKSJDHY12</td>
+                <td>Remote</td>
+                <td>12/06/24</td>
+                <td>
+                    <div class="special yellow"><h6>Yeni</h6></div>
+                </td>
+                <td class="imageTd">
+                    <img src="../assets/svg/view.svg" alt="view" onclick="viewRow(this)">
+                    <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+                </td>
+            </tr>
+            <tr>
+                <td>AKSJDHY12</td>
+                <td>Remote</td>
+                <td>12/06/24</td>
+                <td>
+                    <div class="special red"><h6>Cavab gözlənilir</h6></div>
+                </td>
+                <td class="imageTd">
+                    <img src="../assets/svg/view.svg" alt="view" onclick="viewRow(this)">
+                    <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+                </td>
+            </tr>
+            <tr>
+                <td>AKSJDHY12</td>
+                <td>Remote</td>
+                <td>12/06/24</td>
+                <td>
+                    <div class="special green"><h6>Tamamlandı</h6></div>
+                </td>
+                <td class="imageTd">
+                    <img src="../assets/svg/view.svg" alt="view" onclick="viewRow(this)">
+                    <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+            function deleteRow(element) {
+            var row = element.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+        function searchTable() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("search");
+            filter = input.value.toLowerCase();
+            table = document.getElementById("dataTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

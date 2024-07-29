@@ -274,3 +274,68 @@ table{
          }
      }
 }
+.complaint{
+    h3{
+        padding-left: 133px !important;
+        color: #00A0DF;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 22.385px; /* 150% */
+    }
+    .line{
+        width: 80px;
+        height: 2px;
+        margin-top: -10px;
+        margin-left: 133px !important;
+        background-color: #00A0DF;
+    }
+}
+.blue{
+    background: rgba(54, 158, 221, 0.30);
+    h6{
+        color: #369EDD;
+    }
+}
+.yellow{
+    background: #FFF5CA;
+    h6{
+        color: #D47F00;
+    }
+}
+.red{
+background: rgba(228, 55, 61, 0.30);
+h6{
+    color: #E4373D;
+}
+}
+.green{
+background: rgba(115, 180, 54, 0.30);
+h6{
+    color: #73B436;
+}
+}
+.special{
+width: 100px;
+height: 25px;
+border-radius: 3.916px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+    h6{
+       
+font-size: 12px;
+font-style: normal;
+font-weight: 700;
+line-height: 17.621px; 
+    }
+}
+#branchTable{
+    tr{
+        th{
+width: 550px;
+        }
+       
+    }
+}

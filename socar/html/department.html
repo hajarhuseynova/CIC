@@ -9,7 +9,7 @@
         .imageTd img {
             cursor: pointer;
         }
-        .edit-mode td input {
+        .view-mode td input {
             width: 100%;
             box-sizing: border-box;
         }
@@ -38,50 +38,76 @@
         <img src="../assets/svg/search.svg" alt="">
         <input type="text" name="search" id="search" placeholder="Axtar" onkeyup="searchTable()">
     </div>
-    <table id="dataTable">
+    <table id="departmentTable">
         <tr>
-            <th>Ad</th>
-            <th>Soy Ad</th>
-            <th>Şöbə</th>
-            <th>Vəzifə</th>
+            <th>ID</th>
+            <th></th>
+            <th>Name</th>
+            <th></th>
             <th></th>
         </tr>
         <tr>
-            <td>Fəxriyyə</td>
-            <td>Sadiqova</td>
-            <td>Design</td>
-            <td>Admin</td>
+            <td>123GFDFTYUK</td>
+            <td></td>
+            <td>Murad</td>
+            <td></td>
             <td class="imageTd">
+                <img src="../assets/svg/view.svg" alt="View" >
                 <img src="../assets/svg/edit.svg" alt="Edit" onclick="editRow(this)">
                 <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
             </td>
         </tr>
         <tr>
-            <td>Saleh</td>
-            <td>Quliyev</td>
-            <td>HR</td>
-            <td>Admin</td>
+            <td>123GFDFTYUK</td>
+            <td></td>
+            <td>Murad</td>
+            <td></td>
             <td class="imageTd">
+                <img src="../assets/svg/view.svg" alt="View" >
                 <img src="../assets/svg/edit.svg" alt="Edit" onclick="editRow(this)">
                 <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
             </td>
         </tr>
         <tr>
-            <td>Fəridə</td>
-            <td>Həsənova</td>
-            <td>Saleh</td>
-            <td>Admin</td>
+            <td>123GFDFTYUK</td>
+            <td></td>
+            <td>Murad</td>
+            <td></td>
             <td class="imageTd">
+                <img src="../assets/svg/view.svg" alt="View" >
                 <img src="../assets/svg/edit.svg" alt="Edit" onclick="editRow(this)">
                 <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
             </td>
         </tr>
         <tr>
-            <td>İsmayıl</td>
-            <td>Tağıyev</td>
-            <td>Development</td>
-            <td>Admin</td>
+            <td>123GFDFTYUK</td>
+            <td></td>
+            <td>Murad</td>
+            <td></td>
             <td class="imageTd">
+                <img src="../assets/svg/view.svg" alt="View" >
+                <img src="../assets/svg/edit.svg" alt="Edit" onclick="editRow(this)">
+                <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+            </td>
+        </tr>
+        <tr>
+            <td>123GFDFTYUK</td>
+            <td></td>
+            <td>Murad</td>
+            <td></td>
+            <td class="imageTd">
+                <img src="../assets/svg/view.svg" alt="View" >
+                <img src="../assets/svg/edit.svg" alt="Edit" onclick="editRow(this)">
+                <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
+            </td>
+        </tr>
+        <tr>
+            <td>123GFDFTYUK</td>
+            <td></td>
+            <td>Murad</td>
+            <td></td>
+            <td class="imageTd">
+                <img src="../assets/svg/view.svg" alt="View" >
                 <img src="../assets/svg/edit.svg" alt="Edit" onclick="editRow(this)">
                 <img src="../assets/svg/trash.svg" alt="Delete" onclick="deleteRow(this)">
             </td>
@@ -91,16 +117,17 @@
         function searchTable() {
             var input, filter, table, tr, td, i, j, txtValue;
             input = document.getElementById("search");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("dataTable");
+            filter = input.value.toLowerCase();
+            table = document.getElementById("departmentTable");
             tr = table.getElementsByTagName("tr");
+
             for (i = 1; i < tr.length; i++) {
                 tr[i].style.display = "none";
                 td = tr[i].getElementsByTagName("td");
                 for (j = 0; j < td.length; j++) {
                     if (td[j]) {
                         txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
                             tr[i].style.display = "";
                             break;
                         }
@@ -108,47 +135,30 @@
                 }
             }
         }
-
-        function editRow(r) {
-            var row = r.parentNode.parentNode;
-            if (row.classList.contains('edit-mode')) {
-                saveRow(row);
-            } else {
-                makeRowEditable(row);
-            }
+     
+        function editRow(element) {
+            var row = element.parentNode.parentNode;
+            var nameCell = row.getElementsByTagName('td')[2];
+            var txt = nameCell.innerText;
+            nameCell.innerHTML = '<input type="text" value="' + txt + '">';
+            element.setAttribute('src', '../assets/svg/edit.svg');
+            element.setAttribute('alt', 'Save');
+            element.setAttribute('onclick', 'saveRow(this)');
         }
 
-        function makeRowEditable(row) {
-            var cells = row.getElementsByTagName('td');
-            for (var i = 0; i < cells.length - 1; i++) {
-                var cell = cells[i];
-                if (i === 3) { 
-                    continue;
-                }
-                var input = document.createElement('input');
-                input.type = 'text';
-                input.value = cell.innerText;
-                cell.innerHTML = '';
-                cell.appendChild(input);
-            }
-            row.classList.add('edit-mode');
+        function saveRow(element) {
+            var row = element.parentNode.parentNode;
+            var nameCell = row.getElementsByTagName('td')[2];
+            var input = nameCell.getElementsByTagName('input')[0];
+            nameCell.innerHTML = input.value;
+            element.setAttribute('src', '../assets/svg/edit.svg');
+            element.setAttribute('alt', 'Edit');
+            element.setAttribute('onclick', 'editRow(this)');
         }
 
-        function saveRow(row) {
-            var cells = row.getElementsByTagName('td');
-            for (var i = 0; i < cells.length - 1; i++) {
-                var cell = cells[i];
-                if (i === 3) {
-                    continue;
-                }
-                var input = cell.getElementsByTagName('input')[0];
-                cell.innerHTML = input.value;
-            }
-            row.classList.remove('edit-mode');
-        }
 
-        function deleteRow(r) {
-            var row = r.parentNode.parentNode;
+        function deleteRow(element) {
+            var row = element.parentNode.parentNode;
             row.parentNode.removeChild(row);
         }
     </script>
